@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #282828;
+}
+
+.drumkit {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* vh = viewport height*/
+    height: 100vh;
+}
+
+.pad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 calc(33.333% - 20px);
+    margin: 3px;
+    background: radial-gradient(#0144ed, #29c5e9);
+    border-radius: 20px;
+}
+
+.pad:active {
+    background: radial-gradient(#0144ed,    #d1f5fe);
+}
+
+.pad p {
+    font-family: "Courier New", Courier, monospace;
+    color: #fff;
+    font-size: 1.5em;
+}
