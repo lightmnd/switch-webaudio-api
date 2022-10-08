@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function play() {
+            let audio;
+            let audioFileUrl =
+                "https://s3-us-west-2.amazonaws.com/demo-aud-samp/samples/Cym_Blofeld_1.wav";
+
+            let context = new(window.AudioContext || window.webkitAudioContext)();
+
+            // modern "fetch" using "async/await"
+            const response = await fetch(audioFileUrl);
+            const arrBuff = await response.arrayBuffer();
+            const decodeAudio = await context.decodeAudioData(arrBuff);
+            audio = decodeAudio;
+
+            // configure player
+            const playSound = context.createBufferSource();
+            playSound.buffer = audio;
+            playSound.connect(context.destination);
+            playSound.start(context.currentTime);
+
+            // old-school method
+            /* let xhr = new XMLHttpRequest();
+                                            xhr.open("GET", audioFileUrl);
+                                            xhr.responseType = "arraybuffer";
+                                            xhr.onload = function() {
+                                                context.decodeAudioData(xhr.response, function(audio) {
+                                                    let buffer = context.createBufferSource();
+                                                    buffer.connect(context.destination);
+                                                    buffer.buffer = audio;
+                                                    buffer.start(0);
+                                                });
+                                            };
+                                            xhr.send(); */
+        }
+    </script>
+    <script src="index.js"></script>
+    <button onclick="play()">Play!</button>
+</body>
+
+</html>
