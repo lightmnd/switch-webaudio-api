@@ -4,9 +4,9 @@ console.log(audioCtx.sampleRate);
 
 // create buffer (collect all the sample available durint the time)
 let buffer = audioCtx.createBuffer(
-    1, // like "mono", 2 for "stereo", 6 for "5.1", ...
-    audioCtx.sampleRate * 1, // collect all sample rate for 1 sec
-    audioCtx.sampleRate // to pass all the sample
+  1, // like "mono", 2 for "stereo", 6 for "5.1", ...
+  audioCtx.sampleRate * 1, // collect all sample rate for 1 sec
+  audioCtx.sampleRate // to pass all the sample
 );
 
 // create channel indexed from 0 to get the first channel,
@@ -17,7 +17,7 @@ let channelData = buffer.getChannelData(0);
 // create signal mutating the channel data (for example using a for loop)
 // using negative value to generate white noise sound
 for (let i = 0; i < buffer.sampleRate; i++) {
-    channelData[i] = Math.random() * 2 - 1;
+  channelData[i] = Math.random() * 2 - 1;
 }
 
 // create white noise source
@@ -37,8 +37,9 @@ gainControl.connect(audioCtx.destination);
 // create Play button
 const btn = document.createElement("button");
 btn.innerText = "White Noise";
+
 btn.addEventListener("click", () => {
-    wNSource.start();
+  wNSource.start();
 });
 
 document.body.appendChild(btn);
